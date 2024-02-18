@@ -1,5 +1,5 @@
 name: 'Generate Repository'
-description: 'Build and publish an unmanic plugin repository'
+description: 'Automatically generate a repo branch from an Unmanic repo source directory'
 inputs:
   python_version:
     description: 'Python version for setup'
@@ -16,6 +16,7 @@ inputs:
   github_token:
     description: 'A GitHub token with the permissions to push back to this repository'
     required: true
+    default: ${{ github.token }}
 runs:
   using: 'composite'
   steps:
@@ -49,5 +50,5 @@ runs:
         REPO: self
         BRANCH: repo
         FOLDER: repo
-        SQUASH_HISTORY: true
+        SQUASH_HISTORY: 'true'
         GITHUB_TOKEN: ${{ inputs.github_token }}
