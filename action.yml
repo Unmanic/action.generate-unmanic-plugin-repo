@@ -1,9 +1,6 @@
 name: 'Generate Repository'
 description: 'Build and publish an unmanic plugin repository'
 inputs:
-  plugin_repo:
-    description: 'Plugin repository name'
-    required: true
   python_version:
     description: 'Python version for setup'
     required: false
@@ -12,6 +9,9 @@ inputs:
     description: 'Node version for setup'
     required: false
     default: '20'
+  github_token:
+    description: 'A GitHub token with the permissions to push back to this repository'
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -37,3 +37,13 @@ runs:
       shell: bash
       run: |
         python3 "${{ github.action_path }}/generate_repository.py"
+
+    - name: Deploy repository
+      if: success() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/official')
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        REPO: self
+        BRANCH: repo
+        FOLDER: repo
+        SQUASH_HISTORY: true
+        GITHUB_TOKEN: ${{ inputs.github_token }}
