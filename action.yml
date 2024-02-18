@@ -1,0 +1,39 @@
+name: 'Generate Repository'
+description: 'Build and publish an unmanic plugin repository'
+inputs:
+  plugin_repo:
+    description: 'Plugin repository name'
+    required: true
+  python_version:
+    description: 'Python version for setup'
+    required: false
+    default: '3.11'
+  node_version:
+    description: 'Node version for setup'
+    required: false
+    default: '20'
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python_version }}
+    
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node_version }}
+
+    - name: Check repo for config file
+      shell: bash
+      run: |
+        if [ ! -e ./config.json ]; then
+            echo "Unable to build repo. Missing config.json file."
+            exit 1
+        fi
+
+    - name: Build repository
+      shell: bash
+      run: |
+        python3 "${{ github.action_path }}/generate_repository.py"
