@@ -2,11 +2,11 @@
 # -*- coding:utf-8 -*-
 ###
 # File: generate_repository.py
-# Project: action-generate-unmanic-plugin-repo
+# Project: action.generate-unmanic-plugin-repo
 # File Created: Sunday, 18th February 2024 4:22:57 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Sunday, 18th February 2024 4:27:38 pm
+# Last Modified: Monday, 19th February 2024 9:06:06 am
 # Modified By: Josh.5 (jsunnex@gmail.com)
 ###
 import glob

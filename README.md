@@ -1,4 +1,4 @@
-# action-generate-unmanic-plugin-repo
+# action.generate-unmanic-plugin-repo
 A GitHub action that automatically generates a built git `repo` branch from a source directory and push the contents of that git branch back to the remote repository hosted on GitHub.
 
 The intention of this action is to easily publish your Unmanic repository whenever the default branch is updated.
@@ -26,13 +26,13 @@ The intention of this action is to easily publish your Unmanic repository whenev
 Generate the plugin repository and publish it back to GitHub as a `repo` branch.
 ```yaml
 - name: Generate and Publish Unmanic Plugin Repository
-  uses: Josh5/action-generate-unmanic-plugin-repo@master
+  uses: Unmanic/action.generate-unmanic-plugin-repo@master
 ```
 
 Generate the plugin repository without publishing it back to GitHub.
 ```yaml
 - name: Generate Unmanic Plugin Repository
-  uses: Josh5/action-generate-unmanic-plugin-repo@master
+  uses: Unmanic/action.generate-unmanic-plugin-repo@master
   with:
     deploy_repo: 'false'
 ```
