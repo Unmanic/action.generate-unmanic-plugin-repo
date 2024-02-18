@@ -9,6 +9,10 @@ inputs:
     description: 'Node version for setup'
     required: false
     default: '20'
+  deploy_repo:
+    description: 'Boolean to determine if the repository should be deployed'
+    required: false
+    default: 'true'
   github_token:
     description: 'A GitHub token with the permissions to push back to this repository'
     required: true
@@ -39,7 +43,7 @@ runs:
         python3 "${{ github.action_path }}/generate_repository.py"
 
     - name: Deploy repository
-      if: success() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/official')
+      if: ${{ inputs.deploy_repo == 'true' }} && success() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/official')
       uses: s0/git-publish-subdir-action@develop
       env:
         REPO: self
