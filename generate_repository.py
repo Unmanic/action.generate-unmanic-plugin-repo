@@ -6,8 +6,8 @@
 # File Created: Sunday, 18th February 2024 4:22:57 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Monday, 19th February 2024 9:06:06 am
-# Modified By: Josh.5 (jsunnex@gmail.com)
+# Last Modified: Tuesday, 3rd September 2024 9:48:34 am
+# Modified By: Josh5 (jsunnex@gmail.com)
 ###
 import glob
 import hashlib
@@ -154,6 +154,8 @@ for item in os.listdir(repo_source_path):
             if '.git' in rel_path.split(os.path.sep):
                 continue
             if '.github' in rel_path.split(os.path.sep):
+                continue
+            if '__pycache__' in rel_path.split(os.path.sep):
                 continue
             for file in files:
                 # Skip files starting with .git
