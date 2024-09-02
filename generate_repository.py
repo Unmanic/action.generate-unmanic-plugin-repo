@@ -6,7 +6,7 @@
 # File Created: Sunday, 18th February 2024 4:22:57 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Tuesday, 3rd September 2024 9:48:34 am
+# Last Modified: Tuesday, 3rd September 2024 10:20:01 am
 # Modified By: Josh5 (jsunnex@gmail.com)
 ###
 import glob
@@ -17,6 +17,7 @@ import pip
 import re
 import shutil
 import subprocess
+import sys
 import zipfile
 
 # Set the path to the project root directory
@@ -55,7 +56,11 @@ def install_requirements(plugin_source_path):
     if not os.path.exists(requirements_file):
         print('      - no requirements.txt file found')
         return
-    pip.main(['install', '--upgrade', '-r', requirements_file, '--target={}'.format(install_target)])
+    subprocess.call([
+        sys.executable, '-m', 'pip', 'install', '--upgrade',
+        '-r', requirements_file,
+        '--target={}'.format(install_target)
+    ])
 
 
 # Build repo based on files in source directory
