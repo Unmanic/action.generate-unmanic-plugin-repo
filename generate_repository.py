@@ -6,8 +6,8 @@
 # File Created: Sunday, 18th February 2024 4:22:57 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Tuesday, 3rd September 2024 10:20:01 am
-# Modified By: Josh5 (jsunnex@gmail.com)
+# Last Modified: Friday, 29th August 2025 12:26:46 pm
+# Modified By: Josh.5 (jsunnex@gmail.com)
 ###
 import glob
 import hashlib
@@ -146,10 +146,16 @@ for item in os.listdir(repo_source_path):
         print()
 
         # Install any package requirements
-        print("    Installing NPM package requirements...")
-        install_npm_modules(item_path)
-        print("    Installing Python package requirements...")
-        install_requirements(item_path)
+        if plugin_info.get('defer_dependency_install', False):
+            print("    Deferring installation of NPM package requirements due to 'defer_dependency_install' flag in info.json...")
+        else:
+            print("    Installing NPM package requirements...")
+            install_npm_modules(item_path)
+        if plugin_info.get('defer_dependency_install', False):
+            print("    Deferring installation of Python package requirements due to 'defer_dependency_install' flag in info.json...")
+        else:
+            print("    Installing Python package requirements...")
+            install_requirements(item_path)
 
         # Generate a zip file from the plugin contents
         print("    Compressing {}...".format(plugin_zip))
