@@ -43,8 +43,16 @@ runs:
       run: |
         python3 "${{ github.action_path }}/generate_repository.py"
 
+    - name: Deploy repository exec context
+      shell: bash
+      run: |
+        echo "event: ${{ github.event_name }}"
+        echo "ref: ${{ github.ref }}"
+        echo "base_ref: ${{ github.base_ref }}"
+        echo "deploy_repo: ${{ inputs.deploy_repo }}"
+
     - name: Deploy repository
-      if: ${{ inputs.deploy_repo == 'true' }} && success() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/official')
+      if: inputs.deploy_repo == 'true' && success()
       uses: s0/git-publish-subdir-action@develop
       env:
         REPO: self
